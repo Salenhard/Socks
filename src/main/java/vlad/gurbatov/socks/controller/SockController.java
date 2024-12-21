@@ -32,7 +32,6 @@ public class SockController {
     private final Job job;
     private final String TEMP_STORAGE = "/tmp/";
 
-
     @PostMapping("/income")
     public ResponseEntity<?> income(@Valid @RequestBody SockDto dto) {
         Sock sock = sockMapper.toEntity(dto);
