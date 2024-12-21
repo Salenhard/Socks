@@ -8,9 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
 
-/**
- * DTO for {@link vlad.gurbatov.socks.entity.Sock}
- */
 @Getter
 @Setter
 public class SockDto {
