@@ -1,30 +1,24 @@
 package vlad.gurbatov.socks.controller;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import org.yaml.snakeyaml.util.EnumUtils;
 import vlad.gurbatov.socks.entity.Sock;
 import vlad.gurbatov.socks.entity.dto.SockDto;
 import vlad.gurbatov.socks.entity.dto.mapper.SockMapper;
 import vlad.gurbatov.socks.service.SockService;
-import vlad.gurbatov.socks.util.SortType;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
