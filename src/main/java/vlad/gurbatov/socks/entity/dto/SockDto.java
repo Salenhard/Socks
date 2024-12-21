@@ -19,7 +19,7 @@ public class SockDto {
     private String color;
     @Min(0)
     @Max(100)
-    private Integer cotton;
+    private Integer cottonPercentage;
     @Min(0)
     private Integer amount;
 }

@@ -19,4 +19,5 @@ public interface SockService {
     Sock income(Sock sock);
 
     Sock outcome(Sock sock);
+
 }

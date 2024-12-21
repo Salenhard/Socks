@@ -75,9 +75,9 @@ public class SpringBatchConfig {
         DefaultLineMapper<SockDto> lineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
 
-        lineTokenizer.setDelimiter(", ");
+        lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
-        lineTokenizer.setNames("color", "cotton", "amount");
+        lineTokenizer.setNames("color", "cottonPercentage", "amount");
 
         BeanWrapperFieldSetMapper<SockDto> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
 

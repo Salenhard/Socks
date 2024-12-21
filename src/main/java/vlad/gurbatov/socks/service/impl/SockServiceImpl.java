@@ -36,7 +36,14 @@ public class SockServiceImpl implements SockService {
                 .and(Objects.nonNull(moreThenCotton) ? moreThenCotton(moreThenCotton) : null)
                 .and(Objects.nonNull(lessThenCotton) ? lessThenCotton(lessThenCotton) : null)
                 .and(Objects.nonNull(equalCotton) ? equalCotton(equalCotton) : null);
-        Sort sort = Sort.by(Sort.Direction.ASC, Objects.nonNull(sortParam) ? sortParam : "color");
+
+        if(sortParam == null)
+            sortParam = "color";
+        else if(!sortParam.equals("cotton") && !sortParam.equals("color")) {
+            log.info("get all throw exception: Invalid sort type");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid sort type");
+        }
+        Sort sort = Sort.by(Sort.Direction.ASC, sortParam);
         return repository.findAll(filter, sort);
     }
 
@@ -51,13 +58,12 @@ public class SockServiceImpl implements SockService {
         log.info("update by id: `{}`, {}", id, sock);
         Sock updatedSock = repository.findById(id).map(newSock ->
         {
-            newSock.setId(sock.getId());
             newSock.setColor(sock.getColor());
             newSock.setAmount(sock.getAmount());
-            newSock.setCotton(sock.getCotton());
+            newSock.setCottonPercentage(sock.getCottonPercentage());
             return newSock;
         }).orElseThrow(() -> {
-            log.info("Sock with id: `{}` not found", id);
+            log.info("update by id throw exception: Sock with id: `{}` not found", id);
             return new ResponseStatusException(HttpStatus.NOT_FOUND, "Sock with id: `%d` not found".formatted(id));
         });
 
@@ -77,7 +83,7 @@ public class SockServiceImpl implements SockService {
     @Override
     public Sock income(Sock sock) {
         log.info("income: {}", sock);
-        Sock find = repository.findByColorAndCotton(sock.getColor(), sock.getCotton())
+        Sock find = repository.findByColorAndCottonPercentage(sock.getColor(), sock.getCottonPercentage())
                 .orElseThrow(() -> {
                     log.info("income throw exception: Sock not found");
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Sock not found");
@@ -89,7 +95,7 @@ public class SockServiceImpl implements SockService {
     @Override
     public Sock outcome(Sock sock) {
         log.info("outcome: {}", sock);
-        Sock find = repository.findByColorAndCotton(sock.getColor(), sock.getCotton())
+        Sock find = repository.findByColorAndCottonPercentage(sock.getColor(), sock.getCottonPercentage())
                 .orElseThrow(() -> {
                     log.info("outcome throw exception: Sock not found");
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Sock not found");

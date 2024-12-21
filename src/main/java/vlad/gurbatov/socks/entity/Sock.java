@@ -16,6 +16,6 @@ public class Sock {
     @GeneratedValue
     private Long id;
     private String color;
-    private Integer cotton;
+    private Integer cottonPercentage;
     private Integer amount;
 }

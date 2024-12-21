@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface SockRepository extends JpaRepository<Sock, Long>, JpaSpecificationExecutor<Sock> {
 
-    Optional<Sock> findByColorAndCotton(String color, Integer cotton);
+    Optional<Sock> findByColorAndCottonPercentage(String color, Integer cottonPercentage);
 }

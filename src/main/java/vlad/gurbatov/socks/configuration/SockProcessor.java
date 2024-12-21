@@ -10,7 +10,7 @@ public class SockProcessor implements ItemProcessor<SockDto, Sock> {
     public Sock process(@Valid SockDto dto) {
         Sock sock = new Sock();
         sock.setColor(dto.getColor());
-        sock.setCotton(dto.getCotton());
+        sock.setCottonPercentage(dto.getCottonPercentage());
         sock.setAmount(dto.getAmount());
         return sock;
     }
